@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 
@@ -15,7 +16,7 @@ public class WhenCreatingANewClient {
 
     @Before
     public void setupBaseUrl() {
-        RestAssured.baseURI = "http://localhost:9000/api";
+        baseURI = "http://localhost:9000/api";
     }
 
     @Test
@@ -26,7 +27,7 @@ public class WhenCreatingANewClient {
         clientData.put("firstName","Michael");
         clientData.put("lastName","Scott");
 
-        RestAssured.given()
+        AuthenticationRequest.basic_authentication()
                 .contentType(ContentType.JSON)
                 .body(clientData)
                 .when()
@@ -46,8 +47,7 @@ public class WhenCreatingANewClient {
         clientData.put("firstName","Kevin");
         clientData.put("lastName","Malone");
 
-        RestAssured.given()
-                .contentType(ContentType.JSON)
+        AuthenticationRequest.digest_authentication().given().contentType(ContentType.JSON)
                 .body(clientData)
                 .when()
                 .post("/client")
