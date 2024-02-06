@@ -2,8 +2,10 @@ package net.bddtrader.acceptancetests;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +13,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
-
+@RunWith(SerenityRunner.class)
 public class WhenCreatingANewClient {
 
     @Before
